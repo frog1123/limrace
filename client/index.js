@@ -6,7 +6,7 @@ socket.on("connect", () => {
 });
 
 socket.on("user-connected", data => {
-  document.getElementById("login-info").textContent = `Logged in as ${data.name}`;
+  document.getElementById("login-info").textContent = `logged in as ${data.name}`;
 
   console.log(data);
 
@@ -26,8 +26,6 @@ socket.on("user-connected", data => {
 });
 
 socket.on("broadcasted-user-connected", name => {
-  document.getElementById("other-users").textContent = `${document.getElementById("other-users").textContent} ${name}`;
-
   const race = document.getElementById("race");
 
   race.innerHTML = `${race.innerHTML}

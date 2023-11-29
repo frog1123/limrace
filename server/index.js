@@ -11,14 +11,10 @@ io.on("connection", socket => {
     const newUserName = `guest-${Math.floor(Math.random() * 900000) + 100000}`;
     users.set(socket.id, newUserName);
 
-    // console.log("users", users);
-
     socket.emit("user-connected", {
       name: newUserName,
       otherUsers: Array.from(users.values()).filter(username => username !== newUserName)
     });
-
-    console.log(users.values());
 
     socket.broadcast.emit("broadcasted-user-connected", newUserName);
     console.log("[new user connected]", newUserName);
