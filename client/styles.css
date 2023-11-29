@@ -1,0 +1,49 @@
+html,
+body {
+  background-color: black;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#race-container {
+  width: 100%;
+  margin-top: 6em;
+}
+
+#race {
+  display: grid;
+  background-color: rgb(43, 43, 43);
+  gap: 1em;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+#race .row {
+  display: grid;
+  grid-template-columns: auto max-content;
+  place-items: center;
+}
+
+#race .row .track {
+  width: 100%;
+}
+
+#race .row .track span {
+  margin-right: auto;
+  transform: scaleX(-1);
+  display: inline-block;
+  font-size: 4em;
+}
+
+#race .separator {
+  width: 100%;
+  border: 2px dashed lightgray;
+  box-sizing: border-box;
+}
