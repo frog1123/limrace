@@ -5,20 +5,24 @@ socket.on("connect", () => {
   socket.emit("new-user-connected");
 });
 
-socket.on("user-connected", name => {
-  document.getElementById("login-info").textContent = `Logged in as ${name}`;
+socket.on("user-connected", data => {
+  document.getElementById("login-info").textContent = `Logged in as ${data.name}`;
 
-  race.innerHTML = `${race.innerHTML}
-  <div class="row">
-    <div class="track">
-      <span>🏎️</span>
+  console.log(data);
+
+  for (let i = 0; i < data.otherUsers.length; i++) {
+    race.innerHTML = `${race.innerHTML}
+    <div class="row">
+      <div class="track">
+        <span>🏎️</span>
+      </div>
+      <div>
+        <span>0 wpm</span>
+        <span>${data.otherUsers[i]}</span>
+      </div>
     </div>
-    <div>
-      <span>0 wpm</span>
-      <span>0:00</span>
-    </div>
-  </div>
-  <div class="separator"></div>`;
+    <div class="separator"></div>`;
+  }
 });
 
 socket.on("broadcasted-user-connected", name => {
@@ -33,7 +37,7 @@ socket.on("broadcasted-user-connected", name => {
     </div>
     <div>
       <span>0 wpm</span>
-      <span>0:00</span>
+      <span>${name}</span>
     </div>
   </div>
   <div class="separator"></div>`;
