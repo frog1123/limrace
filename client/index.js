@@ -2,15 +2,8 @@ const socket = io("http://localhost:3000");
 
 socket.on("connect", () => {
   console.log("connected to server");
-  socket.emit("new-user", "guestasd");
+  socket.emit("new-user");
 });
-
-// const name = prompt('What is your name?');
-// appendMessage("You joined");
-
-// socket.on("chat-message", data => {
-//   appendMessage(`${data.name}: ${data.message}`);
-// });
 
 socket.on("user-connected", name => {
   document.getElementById("login-info").textContent = `Logged in as ${name}`;
