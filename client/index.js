@@ -2,11 +2,15 @@ const socket = io("http://localhost:3000");
 
 socket.on("connect", () => {
   console.log("connected to server");
-  socket.emit("new-user");
+  socket.emit("new-user-connected");
 });
 
 socket.on("user-connected", name => {
   document.getElementById("login-info").textContent = `Logged in as ${name}`;
+});
+
+socket.on("broadcasted-user-connected", name => {
+  document.getElementById("other-users").textContent = `${document.getElementById("other-users").textContent} ${name}`;
 });
 
 // socket.on("user-disconnected", name => {
