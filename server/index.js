@@ -30,6 +30,6 @@ io.on("connection", socket => {
     const disconnectedUserName = users.get(socket.id);
     users.delete(socket.id);
 
-    io.emit("user-disconnected", disconnectedUserName);
+    socket.broadcast.emit("broadcasted-user-disconnected", disconnectedUserName);
   });
 });

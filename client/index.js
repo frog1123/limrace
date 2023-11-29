@@ -10,9 +10,21 @@ socket.on("user-connected", data => {
 
   console.log(data);
 
+  race.innerHTML = `${race.innerHTML}
+  <div id="row-${data.name}" class="row">
+    <div class="track">
+      <span>🏎️</span>
+    </div>
+    <div>
+      <span>0 wpm</span>
+      <span>${data.name}</span>
+    </div>
+  </div>
+  <div id="separator-${data.name}" class="separator"></div>`;
+
   for (let i = 0; i < data.otherUsers.length; i++) {
     race.innerHTML = `${race.innerHTML}
-    <div class="row">
+    <div id="row-${data.otherUsers[i]}" class="row">
       <div class="track">
         <span>🏎️</span>
       </div>
@@ -21,7 +33,7 @@ socket.on("user-connected", data => {
         <span>${data.otherUsers[i]}</span>
       </div>
     </div>
-    <div class="separator"></div>`;
+    <div id="separator-${data.otherUsers[i]}" class="separator"></div>`;
   }
 });
 
@@ -29,7 +41,7 @@ socket.on("broadcasted-user-connected", name => {
   const race = document.getElementById("race");
 
   race.innerHTML = `${race.innerHTML}
-  <div class="row">
+  <div id="row-${name}" class="row">
     <div class="track">
       <span>🏎️</span>
     </div>
@@ -38,23 +50,13 @@ socket.on("broadcasted-user-connected", name => {
       <span>${name}</span>
     </div>
   </div>
-  <div class="separator"></div>`;
+  <div id="separator-${name}" class="separator"></div>`;
 });
 
-// socket.on("user-disconnected", name => {
-//   appendMessage(`${name} disconnected`);
-// });
+socket.on("broadcasted-user-disconnected", name => {
+  const rowElement = document.getElementById(`row-${name}`);
+  const separatorElement = document.getElementById(`separator-${name}`);
 
-// messageForm.addEventListener("submit", e => {
-//   e.preventDefault();
-//   const message = messageInput.value;
-//   appendMessage(`You: ${message}`);
-//   socket.emit("send-chat-message", message);
-//   messageInput.value = "";
-// });
-
-// function appendMessage(message) {
-//   const messageElement = document.createElement("div");
-//   messageElement.innerText = message;
-//   messageContainer.append(messageElement);
-// }
+  rowElement.remove();
+  separatorElement.remove();
+});
