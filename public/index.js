@@ -1,5 +1,5 @@
-// const socket = io("http://localhost:9000");
-const socket = io("https://limrace-server.onrender.com/");
+const socket = io("http://localhost:3000");
+// const socket = io("https://limrace-server.onrender.com/");
 
 socket.on("connect", () => {
   console.log("connected to server");

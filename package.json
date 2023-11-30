@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"nodemon src/socket.js\" \"nodemon src/express.js\"",
-    "start": "concurrently \"node src/socket.js\" \"node src/express.js\""
+    "dev": "concurrently \"nodemon src/app.js\"",
+    "start": "node src/app.js"
   },
   "author": "",
   "license": "ISC",
