@@ -6,8 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
-  <script defer src="index.js"></script>
-  <link rel="stylesheet" href="styles.css">
+  <script>
+    window.onload = () => {
+      var roomId = window.location.pathname.split('/').pop();
+
+      var dynamicScript = document.getElementById('waiting-js');
+      dynamicScript.src = roomId + '/index.js';
+
+      var dynamicStyles = document.getElementById('waiting-css');
+      dynamicStyles.href = roomId + '/styles.css';
+    }
+  </script>
+  <script defer id="waiting-js"></script>
+  <link rel="stylesheet" id="waiting-css">
   <title>limrace</title>
 </head>
 
@@ -17,9 +28,7 @@
       <p id="login-info">...</p>
     </div>
     <div id="race-container">
-      <div id="race">
-
-      </div>
+      <div id="race"></div>
   </main>
 </body>
 

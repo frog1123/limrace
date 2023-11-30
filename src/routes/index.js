@@ -10,6 +10,7 @@ router.get("/play", (req, res) => {
 });
 
 router.get("/play/index.js", (req, res) => {
+  console.log("Static js");
   res.sendFile(path.join(__dirname, "..", "..", "public", "play", "index.js"));
 });
 
@@ -17,17 +18,20 @@ router.get("/play/styles.css", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "..", "public", "play", "styles.css"));
 });
 
-// dynamic route
-router.get("/play/:roomId", (req, res) => {
+// dynamic
+router.get("/play/:id", (req, res) => {
+  console.log("Dynamic Index.html route");
   res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "index.html"));
 });
 
-router.get("/play/:roomId/index.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "index.html"));
+router.get("/play/:id/index.js", (req, res) => {
+  console.log("Dynamic Index.js route");
+  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "index.js"));
 });
 
-router.get("/play/:roomId/styles.css", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "index.html"));
+router.get("/play/:id/styles.css", (req, res) => {
+  console.log("Dynamic Styles.css route");
+  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "styles.css"));
 });
 
 module.exports = router;
