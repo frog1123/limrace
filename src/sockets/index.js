@@ -3,7 +3,11 @@ const socketIO = require("socket.io");
 const users = new Map();
 
 const setupSocketIO = (server, port) => {
-  const io = socketIO(server);
+  const io = socketIO(server, {
+    cors: {
+      origin: "*"
+    }
+  });
 
   io.on("connection", socket => {
     console.log(`socket server running on port ${port}`);
