@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 
 // express
-app.use("/play", routes);
+app.use("/", routes);
 
 // socket
 setupSocketIO(server, port);
