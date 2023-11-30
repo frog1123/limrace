@@ -1,5 +1,5 @@
 // const socket = io("http://localhost:3000");
-const socket = io("http://limrace-app.vercel.app");
+const socket = io("https://limrace-app.vercel.app");
 
 socket.on("connect", () => {
   console.log("connected to server");
