@@ -22,7 +22,6 @@ router.get("/play", (req, res) => {
 });
 
 router.get("/play/index.js", (req, res) => {
-  console.log("Static js");
   res.sendFile(path.join(__dirname, "..", "..", "public", "play", "index.js"));
 });
 
@@ -36,12 +35,12 @@ router.get("/play/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "index.html"));
 });
 
-router.get("/play/:id/index.js", (req, res) => {
+router.get("/play/dynamic/index.js", (req, res) => {
   console.log("Dynamic Index.js route");
   res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "index.js"));
 });
 
-router.get("/play/:id/styles.css", (req, res) => {
+router.get("/play/dynamic/styles.css", (req, res) => {
   console.log("Dynamic Styles.css route");
   res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "styles.css"));
 });

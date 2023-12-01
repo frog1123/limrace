@@ -6,19 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
-  <script>
-    window.onload = () => {
-      var roomId = window.location.pathname.split('/').pop();
-
-      var dynamicScript = document.getElementById('waiting-js');
-      dynamicScript.src = roomId + '/index.js';
-
-      var dynamicStyles = document.getElementById('waiting-css');
-      dynamicStyles.href = roomId + '/styles.css';
-    }
-  </script>
-  <script defer id="waiting-js"></script>
-  <link rel="stylesheet" id="waiting-css">
+  <script defer src="dynamic/index.js"></script>
+  <link rel="stylesheet" href="dynamic/styles.css">
   <title>limrace</title>
 </head>
 
