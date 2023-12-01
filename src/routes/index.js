@@ -5,6 +5,18 @@ const path = require("path");
 
 // router.use(express.static((__dirname, "..", "..", "public")));
 
+router.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "index.html"));
+});
+
+router.get("/index.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "index.js"));
+});
+
+router.get("/styles.css", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "styles.css"));
+});
+
 router.get("/play", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "..", "public", "play", "index.html"));
 });
