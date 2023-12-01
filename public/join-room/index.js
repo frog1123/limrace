@@ -14,7 +14,7 @@ joinRoomBtn.onclick = () => {
     const inputValue = codeInput.value;
     if (inputValue.length !== 6 || !/^\d+$/.test(inputValue)) return;
 
-    window.location.href = `/play/${codeInput.value}`;
+    window.location.href = `/room/${codeInput.value}`;
   }
 };
 

@@ -17,29 +17,29 @@ router.get("/styles.css", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "..", "public", "styles.css"));
 });
 
-router.get("/play", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "index.html"));
+router.get("/join-room", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "join-room", "index.html"));
 });
 
-router.get("/play/index.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "index.js"));
+router.get("/join-room/index.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "join-room", "index.js"));
 });
 
-router.get("/play/styles.css", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "styles.css"));
+router.get("/join-room/styles.css", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "join-room", "styles.css"));
 });
 
 // dynamic
-router.get("/play/:id", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "index.html"));
+router.get("/room/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "room", "dynamic", "index.html"));
 });
 
-router.get("/play/dynamic/index.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "index.js"));
+router.get("/room/dynamic/index.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "room", "dynamic", "index.js"));
 });
 
-router.get("/play/dynamic/styles.css", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "..", "public", "play", "dynamic", "styles.css"));
+router.get("/room/dynamic/styles.css", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "room", "dynamic", "styles.css"));
 });
 
 module.exports = router;
