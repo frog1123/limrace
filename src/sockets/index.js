@@ -1,6 +1,7 @@
 const socketIO = require("socket.io");
 
 const users = new Map();
+const rooms = new Map();
 
 const setupSocketIO = (server, port) => {
   const io = socketIO(server, {
@@ -13,6 +14,13 @@ const setupSocketIO = (server, port) => {
     console.log(`socket server running on port ${port}`);
 
     socket.on("join-room", room => {
+      // create room
+      if (!rooms.has(room)) {
+        rooms.set(room, {
+          text: "the brown fox jumps over the lazy dog"
+        });
+      }
+
       // join the specified room
       socket.join(room);
 
@@ -23,8 +31,11 @@ const setupSocketIO = (server, port) => {
       // emit a message to the user with their details
       socket.emit("user-connected", {
         name: newUserName,
-        room,
-        users: getOtherUsersInRoom(room, socket.id)
+        users: getOtherUsersInRoom(room, socket.id),
+        room: {
+          id: room,
+          text: rooms.get(room).text
+        }
       });
 
       socket.to(room).emit("broadcasted-user-connected", { name: newUserName });

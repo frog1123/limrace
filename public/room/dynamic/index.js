@@ -1,5 +1,4 @@
-// const socket = io("http://localhost:3000");
-const socket = io("https://limrace.onrender.com/");
+const socket = io(window.length.origin);
 
 socket.on("connect", () => {
   console.log("connected to server");
@@ -10,7 +9,9 @@ socket.on("connect", () => {
 
 let roomUsers = [];
 socket.on("user-connected", data => {
-  document.getElementById("login-info").textContent = `logged in as ${data.name} in room ${data.room}`;
+  document.getElementById("login-info").textContent = `logged in as ${data.name} in room ${data.room.id}`;
+
+  document.getElementById("text").textContent = data.room.text;
 
   roomUsers = data.users;
   renderUsers();
