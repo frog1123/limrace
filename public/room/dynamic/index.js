@@ -8,13 +8,17 @@ socket.on("connect", () => {
 });
 
 let roomUsers = [];
-let currentWord;
+let words;
+let currentWordIndex = 0;
 
 socket.on("user-connected", data => {
   document.getElementById("login-info").textContent = `logged in as ${data.name} in room ${data.room.id}`;
 
+  words = data.room.text.split(" ").map((word, index, array) => {
+    return index === array.length - 1 ? word : word + " ";
+  });
+  console.log("words: ", words);
   renderInitialText(data.room.text);
-  currentWord - data.room.text.split(/\s+/)[0];
 
   roomUsers = data.users;
   renderUsers();
@@ -51,18 +55,33 @@ const renderUsers = () => {
   }
 };
 
-const renderInitialText = text => {
+const renderInitialText = () => {
   const container = document.getElementById("text");
-  const words = text.split(/\s+/);
 
   words.forEach(word => {
     const span = document.createElement("span");
     span.textContent = word + " ";
     container.appendChild(span);
   });
+
+  updatePlaceholder(0);
+};
+
+const updatePlaceholder = index => {
+  const input = document.getElementById("input");
+  input.placeholder = words[index];
+  input.setAttribute("data-current-word", index);
 };
 
 const input = document.getElementById("input");
 input.addEventListener("input", () => {
-  console.log("Input value changed:", input.value);
+  if (input.value === words[currentWordIndex]) {
+    input.value = "";
+    currentWordIndex += 1;
+    updatePlaceholder(currentWordIndex);
+
+    if (currentWordIndex === words.length) {
+      console.log("done");
+    }
+  }
 });
