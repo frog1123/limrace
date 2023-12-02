@@ -12,7 +12,8 @@ let words;
 let currentWordIndex = 0;
 
 socket.on("user-connected", data => {
-  document.getElementById("login-info").textContent = `logged in as ${data.name} in room ${data.room.id}`;
+  document.getElementById("room-info").textContent = `room ${data.room.id}`;
+  document.getElementById("login-info").textContent = `logged in as ${data.name}`;
 
   words = data.room.text.split(" ").map((word, index, array) => {
     return index === array.length - 1 ? word : word + " ";

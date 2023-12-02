@@ -13,6 +13,21 @@ body {
   margin-right: auto;
 }
 
+#info-container {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+  color: gray;
+  font-family: "Fira Code", monospace;
+}
+
+#info-container p {
+  margin: 0;
+}
+
 #game-container {
   background-color: rgb(43, 43, 43);
   gap: 1em;
