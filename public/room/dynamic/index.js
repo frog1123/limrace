@@ -44,7 +44,7 @@ const renderUsers = () => {
         <span>0 wpm</span>
       </div>
     </div>
-    ${i + 1 !== roomUsers.length ? `<div id="separator-${roomUsers[i].name}" class="separator"></div>` : ""}`;
+    <div id="separator-${roomUsers[i].name}" class="separator"></div>`;
   }
 };
 

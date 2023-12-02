@@ -18,6 +18,7 @@ body {
   gap: 1em;
   padding: 1em;
   border-radius: 1em;
+  display: grid;
 }
 
 #race-container {
