@@ -86,7 +86,7 @@ body {
   border-radius: 0.5em;
   border-width: 1.5px 0;
   border-style: dashed;
-  border-color: rgb(73, 73, 73);
+  border-color: #494949;
 }
 
 #input {
@@ -97,7 +97,7 @@ body {
   width: 100%;
   box-sizing: border-box;
   font-size: large;
-  background-color: rgb(67, 67, 67);
+  background-color: #434343;
   color: #fff;
   font-family: "Fira Code", monospace;
 }
