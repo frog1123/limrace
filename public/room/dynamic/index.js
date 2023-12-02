@@ -11,6 +11,7 @@ let roomUsers = [];
 let words;
 let currentWordIndex = 0;
 let chars;
+let totalChars;
 let currentCharIndex = 0;
 let virtualText = "";
 
@@ -23,6 +24,7 @@ socket.on("user-connected", data => {
   });
 
   chars = data.room.text.split("");
+  totalChars = chars.length;
   console.log("words: ", words);
   console.log("chars: ", chars);
   renderInitialText();
@@ -36,13 +38,27 @@ socket.on("broadcasted-user-connected", data => {
   renderUsers();
 });
 
-socket.on("broadcasted-user-completed", data => {
+socket.on("broadcasted-user-disconnected", data => {
   roomUsers = roomUsers.filter(user => user.name !== data.name);
   renderUsers();
 });
 
 socket.on("broadcasted-word-completed", data => {
   console.log("data", data);
+
+  const car = document.getElementById(`car-${data.name}`);
+  const container = car.parentElement; // Assuming the container is the parent element
+
+  const move = data.char / totalChars;
+
+  // Calculate the maximum allowed position
+  const maxPosition = container.offsetWidth - car.offsetWidth;
+
+  // Calculate the new left position
+  const newLeft = move * maxPosition;
+
+  // Ensure the new position doesn't go beyond the container boundaries
+  car.style.left = `${Math.min(maxPosition, Math.max(0, newLeft))}px`;
 });
 
 const renderUsers = () => {

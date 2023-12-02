@@ -130,6 +130,8 @@ body {
   grid-template-columns: auto max-content;
   place-items: center;
   gap: 0.5em;
+  position: relative;
+  transition: 250ms ease-in-out;
 }
 
 .car span {
