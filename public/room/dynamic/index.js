@@ -65,6 +65,7 @@ const renderInitialText = () => {
   });
 
   updatePlaceholder(0);
+  highlightCurrentWord(0);
 };
 
 const updatePlaceholder = index => {
@@ -73,12 +74,24 @@ const updatePlaceholder = index => {
   input.setAttribute("data-current-word", index);
 };
 
+const highlightCurrentWord = index => {
+  const wordsContainer = document.getElementById("text").children;
+  for (let i = 0; i < wordsContainer.length; i++) {
+    if (i === index) {
+      wordsContainer[i].classList.add("current-word");
+    } else {
+      wordsContainer[i].classList.remove("current-word");
+    }
+  }
+};
+
 const input = document.getElementById("input");
 input.addEventListener("input", () => {
   if (input.value === words[currentWordIndex]) {
     input.value = "";
     currentWordIndex += 1;
     updatePlaceholder(currentWordIndex);
+    highlightCurrentWord(currentWordIndex);
 
     if (currentWordIndex === words.length) {
       console.log("done");

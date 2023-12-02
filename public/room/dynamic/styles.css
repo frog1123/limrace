@@ -65,3 +65,21 @@ body {
   color: #fff;
   font-family: "Fira Code", monospace;
 }
+
+#text-container {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+#text {
+  font-size: large;
+  color: #fff;
+  font-family: "Fira Code", monospace;
+}
+
+.current-word:not(:empty) {
+  text-decoration: underline;
+  text-decoration-color: #3498db;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
