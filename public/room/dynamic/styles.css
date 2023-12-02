@@ -76,9 +76,13 @@ body {
   width: 100%;
   box-sizing: border-box;
   font-size: large;
-  background-color: rgb(87, 87, 87);
+  background-color: rgb(67, 67, 67);
   color: #fff;
   font-family: "Fira Code", monospace;
+}
+
+#input::placeholder {
+  color: #d3d3d360;
 }
 
 #text-container {
@@ -88,7 +92,7 @@ body {
 
 #text {
   font-size: large;
-  color: #fff;
+  color: #d3d3d360;
   font-family: "Fira Code", monospace;
 }
 
@@ -97,6 +101,10 @@ body {
   text-decoration-color: #3498db;
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
+}
+
+.completed-char {
+  color: #fff;
 }
 
 .incorrect-char {

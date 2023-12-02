@@ -24,7 +24,7 @@ socket.on("user-connected", data => {
   chars = data.room.text.split("");
   console.log("words: ", words);
   console.log("chars: ", chars);
-  renderInitialText(data.room.text);
+  renderInitialText();
 
   roomUsers = data.users;
   renderUsers();
@@ -73,7 +73,10 @@ const renderInitialText = () => {
 
   const caret = document.createElement("div");
   caret.classList.add("caret");
+  caret.style.display = "none";
   container.appendChild(caret);
+
+  updateCaretPosition();
 
   updatePlaceholder(0);
   highlightCurrentChar(0);
@@ -97,25 +100,18 @@ const highlightCurrentChar = index => {
   updateCaretPosition();
 };
 
-const highlightIncorrectChar = index => {
-  for (let i = 0; i < wordsContainer.length; i++) {
-    if (i === index) {
-      wordsContainer[i].classList.add("incorrect-char");
-    } else {
-      wordsContainer[i].classList.remove("incorrect-char");
-    }
-  }
-};
-
 const updateCaretPosition = () => {
   const currentCharElement = document.querySelector(".current-char");
   const caret = document.querySelector(".caret");
 
   if (currentCharElement && caret) {
     const rect = currentCharElement.getBoundingClientRect();
+    const charTop = currentCharElement.offsetTop;
+
+    console.log(charTop);
 
     const charWidth = currentCharElement.offsetWidth;
-    caret.style.top = `${rect.top}px`;
+    caret.style.top = `${charTop}px`;
     caret.style.left = `${rect.right - charWidth}px`;
   }
 };
@@ -123,6 +119,9 @@ const updateCaretPosition = () => {
 let prevInput = "";
 const input = document.getElementById("input");
 input.addEventListener("input", () => {
+  const caret = document.querySelector(".caret");
+  caret.style.display = "block";
+
   highlightCurrentChar(currentCharIndex);
 
   const diff = input.value.length - prevInput.length;
