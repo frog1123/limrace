@@ -10,6 +10,8 @@ socket.on("connect", () => {
 let roomUsers = [];
 let words;
 let currentWordIndex = 0;
+let chars;
+let currentCharIndex = 0;
 
 socket.on("user-connected", data => {
   document.getElementById("room-info").textContent = `room ${data.room.id}`;
@@ -18,7 +20,10 @@ socket.on("user-connected", data => {
   words = data.room.text.split(" ").map((word, index, array) => {
     return index === array.length - 1 ? word : word + " ";
   });
+
+  chars = data.room.text.split("");
   console.log("words: ", words);
+  console.log("chars: ", chars);
   renderInitialText(data.room.text);
 
   roomUsers = data.users;
@@ -60,14 +65,14 @@ const renderUsers = () => {
 const renderInitialText = () => {
   const container = document.getElementById("text");
 
-  words.forEach(word => {
+  chars.forEach(char => {
     const span = document.createElement("span");
-    span.textContent = word + " ";
+    span.textContent = char;
     container.appendChild(span);
   });
 
   updatePlaceholder(0);
-  highlightCurrentWord(0);
+  highlightCurrentChar(0);
 };
 
 const updatePlaceholder = index => {
@@ -76,7 +81,7 @@ const updatePlaceholder = index => {
   input.setAttribute("data-current-word", index);
 };
 
-const highlightCurrentWord = index => {
+const highlightCurrentChar = index => {
   const wordsContainer = document.getElementById("text").children;
   for (let i = 0; i < wordsContainer.length; i++) {
     if (i === index) {
@@ -87,16 +92,27 @@ const highlightCurrentWord = index => {
   }
 };
 
+let prevInput = "";
+
 const input = document.getElementById("input");
 input.addEventListener("input", () => {
+  highlightCurrentChar(currentCharIndex);
+
+  const diff = input.value.length - prevInput.length;
+  currentCharIndex += diff;
+  highlightCurrentChar(currentCharIndex);
+
   if (input.value === words[currentWordIndex]) {
     input.value = "";
     currentWordIndex += 1;
+    // currentCharIndex += words[currentWordIndex - 1].length;
+
     updatePlaceholder(currentWordIndex);
-    highlightCurrentWord(currentWordIndex);
 
     if (currentWordIndex === words.length) {
       console.log("done");
     }
   }
+
+  prevInput = input.value;
 });
