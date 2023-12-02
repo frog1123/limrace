@@ -82,8 +82,11 @@ body {
 
 #race .separator {
   width: 100%;
-  border: 2px dashed lightgray;
   box-sizing: border-box;
+  border-radius: 0.5em;
+  border-width: 1.5px 0;
+  border-style: dashed;
+  border-color: rgb(73, 73, 73);
 }
 
 #input {
