@@ -8,10 +8,13 @@ socket.on("connect", () => {
 });
 
 let roomUsers = [];
+let currentWord;
+
 socket.on("user-connected", data => {
   document.getElementById("login-info").textContent = `logged in as ${data.name} in room ${data.room.id}`;
 
   renderInitialText(data.room.text);
+  currentWord - data.room.text.split(/\s+/)[0];
 
   roomUsers = data.users;
   renderUsers();
@@ -49,5 +52,17 @@ const renderUsers = () => {
 };
 
 const renderInitialText = text => {
-  document.getElementById("text").textContent = text;
+  const container = document.getElementById("text");
+  const words = text.split(/\s+/);
+
+  words.forEach(word => {
+    const span = document.createElement("span");
+    span.textContent = word + " ";
+    container.appendChild(span);
+  });
 };
+
+const input = document.getElementById("input");
+input.addEventListener("input", () => {
+  console.log("Input value changed:", input.value);
+});

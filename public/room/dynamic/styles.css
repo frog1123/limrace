@@ -52,3 +52,16 @@ body {
   border: 2px dashed lightgray;
   box-sizing: border-box;
 }
+
+#input {
+  border: none;
+  outline: none;
+  padding: 0.5em;
+  border-radius: 0.375em;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: large;
+  background-color: rgb(87, 87, 87);
+  color: #fff;
+  font-family: "Fira Code", monospace;
+}
