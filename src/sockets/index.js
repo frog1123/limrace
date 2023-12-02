@@ -55,6 +55,14 @@ const setupSocketIO = (server, port) => {
         users.delete(socket.id);
       }
     });
+
+    socket.on("word-completed", data => {
+      const user = users.get(socket.id);
+
+      console.log(data, user);
+
+      socket.to(user.room).emit("broadcasted-word-completed", { name: user.name, char: data.char });
+    });
   });
 };
 

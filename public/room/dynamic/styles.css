@@ -13,6 +13,16 @@ body {
   margin-right: auto;
 }
 
+@media only screen and (max-width: 600px) {
+  #container {
+    width: 100%;
+  }
+
+  #game-container {
+    border-radius: 0 !important;
+  }
+}
+
 #info-container {
   width: max-content;
   margin-left: auto;

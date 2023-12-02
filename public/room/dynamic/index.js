@@ -36,9 +36,13 @@ socket.on("broadcasted-user-connected", data => {
   renderUsers();
 });
 
-socket.on("broadcasted-user-disconnected", data => {
+socket.on("broadcasted-user-completed", data => {
   roomUsers = roomUsers.filter(user => user.name !== data.name);
   renderUsers();
+});
+
+socket.on("broadcasted-word-completed", data => {
+  console.log("data", data);
 });
 
 const renderUsers = () => {
@@ -157,6 +161,7 @@ input.addEventListener("input", () => {
     // currentCharIndex += words[currentWordIndex - 1].length;
 
     updatePlaceholder(currentWordIndex);
+    socket.emit("word-completed", { char: currentCharIndex });
 
     if (currentWordIndex === words.length) {
       input.style.display = "none";
