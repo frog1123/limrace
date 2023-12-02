@@ -72,6 +72,10 @@ body {
   aspect-ratio: 1 / 1;
 }
 
+#race .row div span {
+  font-family: "Fira Code", monospace;
+}
+
 #race .separator {
   width: 100%;
   border: 2px dashed lightgray;
@@ -136,6 +140,7 @@ body {
 
 .car span {
   margin-top: 20px;
+  font-family: "Fira Code", monospace;
 }
 
 .caret {

@@ -44,20 +44,14 @@ socket.on("broadcasted-user-disconnected", data => {
 });
 
 socket.on("broadcasted-word-completed", data => {
-  console.log("data", data);
-
   const car = document.getElementById(`car-${data.name}`);
-  const container = car.parentElement; // Assuming the container is the parent element
+  const container = car.parentElement;
 
   const move = data.char / totalChars;
-
-  // Calculate the maximum allowed position
   const maxPosition = container.offsetWidth - car.offsetWidth;
-
-  // Calculate the new left position
   const newLeft = move * maxPosition;
 
-  // Ensure the new position doesn't go beyond the container boundaries
+  // ensure the new position doesn't go beyond the container boundaries
   car.style.left = `${Math.min(maxPosition, Math.max(0, newLeft))}px`;
 });
 
