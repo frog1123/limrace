@@ -159,7 +159,8 @@ input.addEventListener("input", () => {
     updatePlaceholder(currentWordIndex);
 
     if (currentWordIndex === words.length) {
-      console.log("done");
+      input.style.display = "none";
+      document.getElementById("finish-text").style.display = "block";
     }
   }
 
