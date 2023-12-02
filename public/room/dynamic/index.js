@@ -161,6 +161,7 @@ input.addEventListener("input", () => {
     if (currentWordIndex === words.length) {
       input.style.display = "none";
       document.getElementById("finish-text").style.display = "block";
+      document.querySelector(".caret").style.display = "none";
     }
   }
 

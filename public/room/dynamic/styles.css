@@ -143,3 +143,8 @@ body {
     opacity: 1;
   }
 }
+
+#finish-text {
+  font-size: larger;
+  text-align: center;
+}
