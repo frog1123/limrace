@@ -44,7 +44,8 @@ const renderUsers = () => {
     race.innerHTML = `${race.innerHTML}
     <div id="row-${roomUsers[i].name}" class="row">
       <div class="track">
-        <div id="car-${roomUsers[i].name}">
+        <div id="car-${roomUsers[i].name}" class="car">
+          <span>${roomUsers[i].name}</span>
           <img src="/assets/red_car.svg" />
         </div>
       </div>

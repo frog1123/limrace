@@ -98,3 +98,15 @@ body {
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
+
+.car {
+  display: grid;
+  width: max-content;
+  grid-template-columns: auto max-content;
+  place-items: center;
+  gap: 0.5em;
+}
+
+.car span {
+  margin-top: 20px;
+}
