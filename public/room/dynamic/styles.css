@@ -97,10 +97,10 @@ body {
 }
 
 .current-char:not(:empty) {
-  text-decoration: underline;
+  /* text-decoration: underline;
   text-decoration-color: #3498db;
   text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-underline-offset: 3px; */
 }
 
 .completed-char {

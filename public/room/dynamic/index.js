@@ -105,10 +105,19 @@ const highlightCompletedChars = () => {
   for (let i = 0; i < wordsContainer.length; i++) {
     const word = wordsContainer[i];
 
+    // if (i + 1 > virtualText.length) return;
+
     if (word.textContent === virtualText[i]) {
       word.classList.remove("incorrect-char");
       word.classList.add("completed-char");
     } else {
+      console.log("asdaslkdhaslkd", virtualText[i]);
+      if (virtualText[i] === " ") {
+        console.log("empty");
+        word.classList.remove("incorrect-char");
+        word.classList.remove("completed-char");
+        return;
+      }
       word.classList.remove("completed-char");
       word.classList.add("incorrect-char");
     }
