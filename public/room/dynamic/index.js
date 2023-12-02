@@ -102,11 +102,16 @@ const highlightCurrentChar = index => {
 };
 
 const highlightCompletedChars = () => {
-  console.log("vt: ", virtualText);
-
   for (let i = 0; i < wordsContainer.length; i++) {
     const word = wordsContainer[i];
-    // console.log(word);
+
+    if (word.textContent === virtualText[i]) {
+      word.classList.remove("incorrect-char");
+      word.classList.add("completed-char");
+    } else {
+      word.classList.remove("completed-char");
+      word.classList.add("incorrect-char");
+    }
   }
 };
 
