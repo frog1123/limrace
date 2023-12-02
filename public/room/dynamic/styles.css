@@ -13,17 +13,19 @@ body {
   margin-right: auto;
 }
 
-#race-container {
-  width: 100%;
-  margin-top: 6em;
-}
-
-#race {
-  display: grid;
+#game-container {
   background-color: rgb(43, 43, 43);
   gap: 1em;
   padding: 1em;
   border-radius: 1em;
+}
+
+#race-container {
+  width: 100%;
+}
+
+#race {
+  display: grid;
 }
 
 #race .row {

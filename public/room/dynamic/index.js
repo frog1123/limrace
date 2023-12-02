@@ -11,7 +11,7 @@ let roomUsers = [];
 socket.on("user-connected", data => {
   document.getElementById("login-info").textContent = `logged in as ${data.name} in room ${data.room.id}`;
 
-  document.getElementById("text").textContent = data.room.text;
+  renderInitialText(data.room.text);
 
   roomUsers = data.users;
   renderUsers();
@@ -45,4 +45,8 @@ const renderUsers = () => {
     </div>
     ${i + 1 !== roomUsers.length ? `<div id="separator-${roomUsers[i].name}" class="separator"></div>` : ""}`;
   }
+};
+
+const renderInitialText = text => {
+  document.getElementById("text").textContent = text;
 };
