@@ -101,23 +101,18 @@ const highlightCurrentChar = index => {
   updateCaretPosition();
 };
 
+let earliestIncorrectChar = Infinity;
 const highlightCompletedChars = () => {
-  for (let i = 0; i < wordsContainer.length; i++) {
+  console.log(currentCharIndex);
+
+  for (let i = currentCharIndex - 1; i < wordsContainer.length; i++) {
     const word = wordsContainer[i];
 
-    // if (i + 1 > virtualText.length) return;
-
-    if (word.textContent === virtualText[i]) {
+    if (word.textContent === virtualText[i] && i < earliestIncorrectChar) {
       word.classList.remove("incorrect-char");
       word.classList.add("completed-char");
     } else {
-      console.log("asdaslkdhaslkd", virtualText[i]);
-      if (virtualText[i] === " ") {
-        console.log("empty");
-        word.classList.remove("incorrect-char");
-        word.classList.remove("completed-char");
-        return;
-      }
+      earliestIncorrectChar = i;
       word.classList.remove("completed-char");
       word.classList.add("incorrect-char");
     }
