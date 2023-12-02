@@ -81,8 +81,8 @@ const updatePlaceholder = index => {
   input.setAttribute("data-current-word", index);
 };
 
+const wordsContainer = document.getElementById("text").children;
 const highlightCurrentChar = index => {
-  const wordsContainer = document.getElementById("text").children;
   for (let i = 0; i < wordsContainer.length; i++) {
     if (i === index) {
       wordsContainer[i].classList.add("current-word");
@@ -92,8 +92,17 @@ const highlightCurrentChar = index => {
   }
 };
 
-let prevInput = "";
+const highlightIncorrectChar = index => {
+  for (let i = 0; i < wordsContainer.length; i++) {
+    if (i === index) {
+      wordsContainer[i].classList.add("incorrect-word");
+    } else {
+      wordsContainer[i].classList.remove("incorrect-word");
+    }
+  }
+};
 
+let prevInput = "";
 const input = document.getElementById("input");
 input.addEventListener("input", () => {
   highlightCurrentChar(currentCharIndex);

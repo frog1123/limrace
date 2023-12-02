@@ -99,6 +99,13 @@ body {
   text-underline-offset: 3px;
 }
 
+.incorrect-word {
+  text-decoration: underline;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
 .car {
   display: grid;
   width: max-content;
