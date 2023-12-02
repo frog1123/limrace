@@ -38,11 +38,12 @@ body {
   width: 100%;
 }
 
-#race .row .track span {
+#race .row .track img {
   margin-right: auto;
   transform: scaleX(-1);
   display: inline-block;
-  font-size: 4em;
+  width: 48px;
+  aspect-ratio: 1 / 1;
 }
 
 #race .separator {

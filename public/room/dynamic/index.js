@@ -36,11 +36,12 @@ const renderUsers = () => {
     race.innerHTML = `${race.innerHTML}
     <div id="row-${roomUsers[i].name}" class="row">
       <div class="track">
-        <span>🏎️</span>
+        <div id="car-${roomUsers[i].name}">
+          <img src="/assets/red_car.svg" />
+        </div>
       </div>
       <div>
         <span>0 wpm</span>
-        <span>${roomUsers[i].name}</span>
       </div>
     </div>
     ${i + 1 !== roomUsers.length ? `<div id="separator-${roomUsers[i].name}" class="separator"></div>` : ""}`;
