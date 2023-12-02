@@ -12,6 +12,7 @@ let words;
 let currentWordIndex = 0;
 let chars;
 let currentCharIndex = 0;
+let virtualText = "";
 
 socket.on("user-connected", data => {
   document.getElementById("room-info").textContent = `room ${data.room.id}`;
@@ -100,6 +101,15 @@ const highlightCurrentChar = index => {
   updateCaretPosition();
 };
 
+const highlightCompletedChars = () => {
+  console.log("vt: ", virtualText);
+
+  for (let i = 0; i < wordsContainer.length; i++) {
+    const word = wordsContainer[i];
+    // console.log(word);
+  }
+};
+
 const updateCaretPosition = () => {
   const currentCharElement = document.querySelector(".current-char");
   const caret = document.querySelector(".caret");
@@ -107,8 +117,6 @@ const updateCaretPosition = () => {
   if (currentCharElement && caret) {
     const rect = currentCharElement.getBoundingClientRect();
     const charTop = currentCharElement.offsetTop;
-
-    console.log(charTop);
 
     const charWidth = currentCharElement.offsetWidth;
     caret.style.top = `${charTop}px`;
@@ -128,6 +136,12 @@ input.addEventListener("input", () => {
   currentCharIndex += diff;
   highlightCurrentChar(currentCharIndex);
 
+  if (diff > 0) {
+    virtualText += input.value.substring(prevInput.length);
+  } else if (diff < 0) {
+    virtualText = virtualText.slice(0, diff);
+  }
+
   if (input.value === words[currentWordIndex]) {
     input.value = "";
     currentWordIndex += 1;
@@ -142,4 +156,5 @@ input.addEventListener("input", () => {
 
   prevInput = input.value;
   updateCaretPosition();
+  highlightCompletedChars();
 });
