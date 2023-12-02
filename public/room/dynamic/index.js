@@ -71,6 +71,10 @@ const renderInitialText = () => {
     container.appendChild(span);
   });
 
+  const caret = document.createElement("div");
+  caret.classList.add("caret");
+  container.appendChild(caret);
+
   updatePlaceholder(0);
   highlightCurrentChar(0);
 };
@@ -85,20 +89,34 @@ const wordsContainer = document.getElementById("text").children;
 const highlightCurrentChar = index => {
   for (let i = 0; i < wordsContainer.length; i++) {
     if (i === index) {
-      wordsContainer[i].classList.add("current-word");
+      wordsContainer[i].classList.add("current-char");
     } else {
-      wordsContainer[i].classList.remove("current-word");
+      wordsContainer[i].classList.remove("current-char");
     }
   }
+  updateCaretPosition();
 };
 
 const highlightIncorrectChar = index => {
   for (let i = 0; i < wordsContainer.length; i++) {
     if (i === index) {
-      wordsContainer[i].classList.add("incorrect-word");
+      wordsContainer[i].classList.add("incorrect-char");
     } else {
-      wordsContainer[i].classList.remove("incorrect-word");
+      wordsContainer[i].classList.remove("incorrect-char");
     }
+  }
+};
+
+const updateCaretPosition = () => {
+  const currentCharElement = document.querySelector(".current-char");
+  const caret = document.querySelector(".caret");
+
+  if (currentCharElement && caret) {
+    const rect = currentCharElement.getBoundingClientRect();
+
+    const charWidth = currentCharElement.offsetWidth;
+    caret.style.top = `${rect.top}px`;
+    caret.style.left = `${rect.right - charWidth}px`;
   }
 };
 
@@ -124,4 +142,5 @@ input.addEventListener("input", () => {
   }
 
   prevInput = input.value;
+  updateCaretPosition();
 });

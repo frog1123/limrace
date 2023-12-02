@@ -92,14 +92,14 @@ body {
   font-family: "Fira Code", monospace;
 }
 
-.current-word:not(:empty) {
+.current-char:not(:empty) {
   text-decoration: underline;
   text-decoration-color: #3498db;
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
 
-.incorrect-word {
+.incorrect-char {
   text-decoration: underline;
   text-decoration-color: red;
   text-decoration-thickness: 2px;
@@ -116,4 +116,22 @@ body {
 
 .car span {
   margin-top: 20px;
+}
+
+.caret {
+  position: absolute;
+  height: 20px;
+  width: 2px;
+  background-color: #fff;
+  animation: caretAnimation 1s ease-in-out infinite;
+}
+
+@keyframes caretAnimation {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
