@@ -130,19 +130,17 @@ const highlightCurrentChar = index => {
 let earliestIncorrectChar = Infinity;
 const highlightCompletedChars = () => {
   for (let i = completedWordCharIndex; i < charsContainer.length; i++) {
-    const word = charsContainer[i];
+    const char = charsContainer[i];
 
-    console.log(virtualText[i], word);
-
-    if (word.textContent === virtualText[i] && i < earliestIncorrectChar) {
-      word.classList.remove("incorrect-char");
-      word.classList.add("completed-char");
+    if (char.textContent === virtualText[i] && i < earliestIncorrectChar) {
+      char.classList.remove("incorrect-char");
+      char.classList.add("completed-char");
     } else if (virtualText[i] === undefined) {
-      word.classList.remove("completed-char");
-      word.classList.remove("incorrect-char");
+      char.classList.remove("completed-char");
+      char.classList.remove("incorrect-char");
     } else {
-      word.classList.remove("completed-char");
-      word.classList.add("incorrect-char");
+      char.classList.remove("completed-char");
+      char.classList.add("incorrect-char");
     }
   }
 };
@@ -190,6 +188,10 @@ input.addEventListener("input", () => {
     socket.emit("word-completed", { char: currentCharIndex });
 
     if (currentWordIndex === words.length) {
+      // -2 don't include caret
+      const lastChar = charsContainer[charsContainer.length - 2];
+      lastChar.classList.add("completed-char");
+
       input.style.display = "none";
       document.getElementById("finish-text").style.display = "block";
       document.querySelector(".caret").style.display = "none";
