@@ -14,6 +14,7 @@ let currentWordIndex = 0;
 let chars;
 let totalChars;
 let currentCharIndex = 0;
+let completedWordCharIndex = 0;
 let virtualText = "";
 
 socket.on("user-connected", data => {
@@ -114,13 +115,13 @@ const updatePlaceholder = index => {
   input.setAttribute("data-current-word", index);
 };
 
-const wordsContainer = document.getElementById("text").children;
+const charsContainer = document.getElementById("text").children;
 const highlightCurrentChar = index => {
-  for (let i = 0; i < wordsContainer.length; i++) {
+  for (let i = 0; i < charsContainer.length; i++) {
     if (i === index) {
-      wordsContainer[i].classList.add("current-char");
+      charsContainer[i].classList.add("current-char");
     } else {
-      wordsContainer[i].classList.remove("current-char");
+      charsContainer[i].classList.remove("current-char");
     }
   }
   updateCaretPosition();
@@ -128,14 +129,18 @@ const highlightCurrentChar = index => {
 
 let earliestIncorrectChar = Infinity;
 const highlightCompletedChars = () => {
-  for (let i = currentCharIndex - 1; i < wordsContainer.length; i++) {
-    const word = wordsContainer[i];
+  for (let i = completedWordCharIndex; i < charsContainer.length; i++) {
+    const word = charsContainer[i];
+
+    console.log(virtualText[i], word);
 
     if (word.textContent === virtualText[i] && i < earliestIncorrectChar) {
       word.classList.remove("incorrect-char");
       word.classList.add("completed-char");
+    } else if (virtualText[i] === undefined) {
+      word.classList.remove("completed-char");
+      word.classList.remove("incorrect-char");
     } else {
-      earliestIncorrectChar = i;
       word.classList.remove("completed-char");
       word.classList.add("incorrect-char");
     }
@@ -178,6 +183,7 @@ input.addEventListener("input", () => {
     input.value = "";
     currentWordIndex += 1;
     // currentCharIndex += words[currentWordIndex - 1].length;
+    completedWordCharIndex = currentCharIndex;
 
     updatePlaceholder(currentWordIndex);
     moveCar(currentUser, currentCharIndex);

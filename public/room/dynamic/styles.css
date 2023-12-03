@@ -1,7 +1,3 @@
-* {
-  transition-duration: 250ms;
-}
-
 html,
 body {
   background-color: black;
@@ -48,6 +44,7 @@ body {
   padding: 1em;
   border-radius: 1em;
   display: grid;
+  transition-duration: 250ms;
 }
 
 #race-container {
@@ -117,6 +114,9 @@ body {
   font-family: "Fira Code", monospace;
 }
 
+#text span {
+}
+
 .current-char:not(:empty) {
   /* text-decoration: underline;
   text-decoration-color: #3498db;
@@ -129,10 +129,12 @@ body {
 }
 
 .incorrect-char {
-  text-decoration: underline;
+  /* text-decoration: underline;
   text-decoration-color: red;
   text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-underline-offset: 3px; */
+
+  color: #ef4444;
 }
 
 .car {
@@ -142,7 +144,7 @@ body {
   place-items: center;
   gap: 0.5em;
   position: relative;
-  transition: 250ms ease-in-out;
+  transition: 750ms ease-in-out;
 }
 
 .car span {
@@ -156,7 +158,7 @@ body {
   width: 2px;
   background-color: #fff;
   /* animation: caretAnimation 1s ease-in-out infinite; */
-  transition-duration: 250ms;
+  transition-duration: 150ms;
 }
 
 @keyframes caretAnimation {
