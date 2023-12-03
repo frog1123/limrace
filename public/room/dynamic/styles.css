@@ -191,7 +191,7 @@ body {
   position: absolute;
   height: 20px;
   width: 2px;
-  background-color: #fff;
+  background-color: #6366f1;
   /* animation: caretAnimation 1s ease-in-out infinite; */
   transition-duration: 150ms;
 }

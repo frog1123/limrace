@@ -9,7 +9,21 @@ codeInput.addEventListener("input", () => {
   checkCodeInputValidity();
 });
 
-joinRoomBtn.onclick = () => {
+codeInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") join();
+});
+
+joinRoomBtn.onclick = () => join();
+
+const checkCodeInputValidity = () => {
+  const inputValue = codeInput.value;
+  const isInputValid = inputValue.length === 6 && /^\d+$/.test(inputValue);
+
+  if (isInputValid) joinRoomBtn.classList.remove("btn-disabled");
+  else joinRoomBtn.classList.add("btn-disabled");
+};
+
+const join = () => {
   if (codeInput) {
     const inputValue = codeInput.value;
     if (inputValue.length !== 6 || !/^\d+$/.test(inputValue)) return;
@@ -17,11 +31,3 @@ joinRoomBtn.onclick = () => {
     window.location.href = `/room/${codeInput.value}`;
   }
 };
-
-function checkCodeInputValidity() {
-  const inputValue = codeInput.value;
-  const isInputValid = inputValue.length === 6 && /^\d+$/.test(inputValue);
-
-  if (isInputValid) joinRoomBtn.classList.remove("btn-disabled");
-  else joinRoomBtn.classList.add("btn-disabled");
-}
