@@ -208,15 +208,12 @@ const getRandomNumber = (min, max) => {
 const generateRandomParagraph = () => {
   let randomParagraph = "";
 
-  for (let i = 0; i < getRandomNumber(15, 30); i++) {
+  const num = getRandomNumber(15, 30);
+  for (let i = 0; i < num; i++) {
     const randomIndex = getRandomNumber(0, words.length - 1);
     const word = words[randomIndex];
 
-    randomParagraph += word;
-
-    if (i < getRandomNumber(10, 30) - 1) {
-      randomParagraph += " ";
-    }
+    randomParagraph += word + (i === num ? "" : " ");
   }
 
   return randomParagraph;

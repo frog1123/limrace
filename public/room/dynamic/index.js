@@ -26,6 +26,9 @@ socket.on("user-connected", data => {
   });
 
   chars = data.room.text.split("");
+  if (words[words.length - 1] === " " || words[words.length - 1] === "") words.pop();
+  if (chars[chars.length - 1] === " " || chars[chars.length - 1] === "") chars.pop();
+
   totalChars = chars.length;
   console.log("words: ", words);
   console.log("chars: ", chars);
