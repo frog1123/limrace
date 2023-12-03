@@ -41,7 +41,13 @@ body {
   margin-right: auto;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
+  #container {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 640px) {
   #container {
     width: 100%;
   }

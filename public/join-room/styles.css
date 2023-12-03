@@ -52,7 +52,7 @@ body {
 }
 
 #code-form span {
-  font-size: 32px;
+  font-size: larger;
   font-family: "Fira Code", monospace;
 }
 
