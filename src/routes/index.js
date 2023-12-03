@@ -42,6 +42,14 @@ router.get("/room/dynamic/styles.css", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "..", "public", "room", "dynamic", "styles.css"));
 });
 
+router.get("/assets/logo.ico", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "assets", "logo.ico"));
+});
+
+router.get("/assets/logo.svg", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "assets", "logo.svg"));
+});
+
 router.get("/assets/red_car.svg", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "..", "assets", "red_car.svg"));
 });
