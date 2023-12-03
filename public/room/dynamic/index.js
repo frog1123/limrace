@@ -157,7 +157,6 @@ const highlightCompletedChars = () => {
     }
   }
 
-  console.log(earliestIncorrectChar);
   if (earliestIncorrectChar < Infinity) input.classList.add("incorrect-input");
   else input.classList.remove("incorrect-input");
 };
