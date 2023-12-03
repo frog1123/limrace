@@ -26,8 +26,11 @@ socket.on("user-connected", data => {
   });
 
   chars = data.room.text.split("");
-  if (words[words.length - 1] === " " || words[words.length - 1] === "") words.pop();
-  if (chars[chars.length - 1] === " " || chars[chars.length - 1] === "") chars.pop();
+
+  while (words[words.length - 1] === " " || words[words.length - 1] === "") words.pop();
+  while (chars[chars.length - 1] === " " || chars[chars.length - 1] === "") chars.pop();
+
+  words[words.length - 1] = words[words.length - 1].trim();
 
   totalChars = chars.length;
   console.log("words: ", words);
@@ -125,8 +128,6 @@ const highlightCurrentChar = index => {
 
 let earliestIncorrectChar = Infinity;
 const highlightCompletedChars = () => {
-  console.log(currentCharIndex);
-
   for (let i = currentCharIndex - 1; i < wordsContainer.length; i++) {
     const word = wordsContainer[i];
 
