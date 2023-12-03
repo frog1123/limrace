@@ -1,4 +1,5 @@
 const socketIO = require("socket.io");
+const generateRandomParagraph = require("../utils/generate-text");
 
 const users = new Map();
 const rooms = new Map();
@@ -14,10 +15,12 @@ const setupSocketIO = (server, port) => {
     console.log(`socket server running on port ${port}`);
 
     socket.on("join-room", room => {
+      const text = generateRandomParagraph();
+
       // create room
       if (!rooms.has(room)) {
         rooms.set(room, {
-          text: "the brown fox jumps over the lazy dog"
+          text
         });
       }
 

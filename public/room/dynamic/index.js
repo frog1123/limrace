@@ -70,7 +70,7 @@ const renderUsers = () => {
     <div id="row-${roomUsers[i].name}" class="row">
       <div class="track">
         <div id="car-${roomUsers[i].name}" class="car">
-          <span>${roomUsers[i].name}</span>
+          <span>${roomUsers[i].name === currentUser ? "&nbsp;you (guest)" : roomUsers[i].name}</span>
           <img src="/assets/red_car.svg" />
         </div>
       </div>
