@@ -100,6 +100,11 @@ body {
   font-family: "Fira Code", monospace;
 }
 
+::selection {
+  background: #3729ce90;
+  color: #fff;
+}
+
 #input::placeholder {
   color: #d3d3d360;
 }
@@ -116,6 +121,7 @@ body {
 }
 
 #text span {
+  user-select: none;
 }
 
 .current-char:not(:empty) {
