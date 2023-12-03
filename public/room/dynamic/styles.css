@@ -132,6 +132,11 @@ body {
   background-color: #434343;
   color: #fff;
   font-family: "Fira Code", monospace;
+  transition-duration: 100ms;
+}
+
+.incorrect-input {
+  background-color: #f43f5e !important;
 }
 
 ::selection {

@@ -128,6 +128,7 @@ const highlightCurrentChar = index => {
   updateCaretPosition();
 };
 
+const input = document.getElementById("input");
 const highlightCompletedChars = () => {
   let earliestIncorrectChar = Infinity;
   for (let i = 0; i < charsContainer.length; i++) {
@@ -155,6 +156,10 @@ const highlightCompletedChars = () => {
       char.classList.add("incorrect-char");
     }
   }
+
+  console.log(earliestIncorrectChar);
+  if (earliestIncorrectChar < Infinity) input.classList.add("incorrect-input");
+  else input.classList.remove("incorrect-input");
 };
 
 const updateCaretPosition = () => {
@@ -172,7 +177,6 @@ const updateCaretPosition = () => {
 };
 
 let prevInput = "";
-const input = document.getElementById("input");
 input.addEventListener("input", () => {
   const caret = document.querySelector(".caret");
   caret.style.display = "block";
