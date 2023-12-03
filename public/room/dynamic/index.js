@@ -127,18 +127,31 @@ const highlightCurrentChar = index => {
   updateCaretPosition();
 };
 
-let earliestIncorrectChar = Infinity;
 const highlightCompletedChars = () => {
-  for (let i = completedWordCharIndex; i < charsContainer.length; i++) {
+  let earliestIncorrectChar = Infinity;
+  for (let i = 0; i < charsContainer.length; i++) {
     const char = charsContainer[i];
 
-    if (char.textContent === virtualText[i] && i < earliestIncorrectChar) {
+    console.log(earliestIncorrectChar);
+
+    if (i >= earliestIncorrectChar) {
+      for (let j = earliestIncorrectChar; j < currentCharIndex; j++) {
+        const ichar = charsContainer[j];
+
+        ichar.classList.remove("completed-char");
+        ichar.classList.add("incorrect-char");
+      }
+      break;
+    }
+
+    if (char.textContent === virtualText[i]) {
       char.classList.remove("incorrect-char");
       char.classList.add("completed-char");
     } else if (virtualText[i] === undefined) {
       char.classList.remove("completed-char");
       char.classList.remove("incorrect-char");
     } else {
+      earliestIncorrectChar = i;
       char.classList.remove("completed-char");
       char.classList.add("incorrect-char");
     }
