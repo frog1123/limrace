@@ -94,7 +94,8 @@ const renderInitialText = () => {
 
   chars.forEach(char => {
     const span = document.createElement("span");
-    span.textContent = char;
+    if (char === " ") span.textContent = "•";
+    else span.textContent = char;
     container.appendChild(span);
   });
 
@@ -132,8 +133,6 @@ const highlightCompletedChars = () => {
   for (let i = 0; i < charsContainer.length; i++) {
     const char = charsContainer[i];
 
-    console.log(earliestIncorrectChar);
-
     if (i >= earliestIncorrectChar) {
       for (let j = earliestIncorrectChar; j < currentCharIndex; j++) {
         const ichar = charsContainer[j];
@@ -144,7 +143,7 @@ const highlightCompletedChars = () => {
       break;
     }
 
-    if (char.textContent === virtualText[i]) {
+    if (char.textContent === virtualText[i] || (char.textContent === "•" && virtualText[i] === " ")) {
       char.classList.remove("incorrect-char");
       char.classList.add("completed-char");
     } else if (virtualText[i] === undefined) {

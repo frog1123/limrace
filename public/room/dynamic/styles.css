@@ -146,10 +146,20 @@ body {
   font-size: large;
   color: #d3d3d360;
   font-family: "Fira Code", monospace;
+  overflow: hidden;
+  white-space: normal;
+  overflow-wrap: break-word;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #text span {
   user-select: none;
+  white-space: nowrap;
+}
+
+#text span:last-child {
+  margin-right: 0;
 }
 
 .current-char:not(:empty) {
