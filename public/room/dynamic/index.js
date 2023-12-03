@@ -8,6 +8,7 @@ socket.on("connect", () => {
 });
 
 let roomUsers = [];
+let currentUser = "";
 let words;
 let currentWordIndex = 0;
 let chars;
@@ -16,8 +17,9 @@ let currentCharIndex = 0;
 let virtualText = "";
 
 socket.on("user-connected", data => {
+  currentUser = data.name;
   document.getElementById("room-info").textContent = `room ${data.room.id}`;
-  document.getElementById("login-info").textContent = `logged in as ${data.name}`;
+  document.getElementById("login-info").textContent = `logged in as ${currentUser}`;
 
   words = data.room.text.split(" ").map((word, index, array) => {
     return index === array.length - 1 ? word : word + " ";
@@ -44,19 +46,22 @@ socket.on("broadcasted-user-disconnected", data => {
 });
 
 socket.on("broadcasted-word-completed", data => {
-  const car = document.getElementById(`car-${data.name}`);
+  moveCar(data.name, data.char);
+});
+
+const moveCar = (name, chars) => {
+  const car = document.getElementById(`car-${name}`);
   const container = car.parentElement;
 
-  const move = data.char / totalChars;
+  const move = chars / totalChars;
   const maxPosition = container.offsetWidth - car.offsetWidth;
   const newLeft = move * maxPosition;
 
   // ensure the new position doesn't go beyond the container boundaries
   car.style.left = `${Math.min(maxPosition, Math.max(0, newLeft))}px`;
-});
+};
 
 const renderUsers = () => {
-  console.log(roomUsers);
   const race = document.getElementById("race");
   race.innerHTML = null;
 
@@ -171,6 +176,7 @@ input.addEventListener("input", () => {
     // currentCharIndex += words[currentWordIndex - 1].length;
 
     updatePlaceholder(currentWordIndex);
+    moveCar(currentUser, currentCharIndex);
     socket.emit("word-completed", { char: currentCharIndex });
 
     if (currentWordIndex === words.length) {
