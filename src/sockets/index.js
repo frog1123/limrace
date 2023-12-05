@@ -41,7 +41,7 @@ const setupSocketIO = (server, port) => {
       do {
         newUserName = `guest-${Math.floor(Math.random() * 900000) + 100000}`;
       } while (isUserNameTaken(newUserName));
-      users.set(newUserName, { name: newUserName, room: roomId });
+      users.set(socket.id, { name: newUserName, room: roomId });
 
       console.log(users, getOtherUsersInRoom(roomId, socket.id));
 
