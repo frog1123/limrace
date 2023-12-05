@@ -7,6 +7,11 @@ socket.on("connect", () => {
   socket.emit("join-room", roomId);
 });
 
+socket.on("room-not-found", () => {
+  document.getElementById("room-found-content").style.display = "none";
+  document.getElementById("room-not-found-content").style.display = "block";
+});
+
 let roomUsers = [];
 let currentUser = "";
 let words;
@@ -40,6 +45,9 @@ socket.on("user-connected", data => {
 
   roomUsers = data.users;
   renderUsers();
+
+  document.getElementById("room-not-found-content").style.display = "none";
+  document.getElementById("room-found-content").style.display = "block";
 });
 
 socket.on("broadcasted-user-connected", data => {

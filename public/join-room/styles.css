@@ -57,7 +57,7 @@ body {
 }
 
 #code-form span {
-  font-size: larger;
+  font-size: large;
   font-family: "Fira Code", monospace;
 }
 
@@ -90,7 +90,7 @@ body {
   color: #fff;
   text-align: center;
   font-family: "Fira Code", monospace;
-  font-size: larger;
+  font-size: large;
 }
 
 #join-room-btn:hover {

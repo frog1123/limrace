@@ -14,18 +14,27 @@ const setupSocketIO = (server, port) => {
   io.on("connection", socket => {
     console.log(`socket server running on port ${port}`);
 
-    socket.on("join-room", room => {
+    socket.on("create-room", () => {
+      let roomId;
+      do {
+        roomId = Math.floor(100000 + Math.random() * 900000);
+      } while (rooms.has(roomId));
       const text = generateRandomParagraph();
 
-      // create room
-      if (!rooms.has(room)) {
-        rooms.set(room, {
-          text
-        });
+      rooms.set(roomId.toString(), { text });
+
+      socket.emit("room-created", roomId);
+    });
+
+    socket.on("join-room", roomId => {
+      // create room (needs to be int)
+      if (!rooms.has(roomId)) {
+        socket.emit("room-not-found");
+        return;
       }
 
       // join the specified room
-      socket.join(room);
+      socket.join(roomId);
 
       // generate a random username for the user
       let newUserName;
@@ -36,14 +45,14 @@ const setupSocketIO = (server, port) => {
       // emit a message to the user with their details
       socket.emit("user-connected", {
         name: newUserName,
-        users: getOtherUsersInRoom(room, socket.id),
+        users: getOtherUsersInRoom(roomId, socket.id),
         room: {
-          id: room,
-          text: rooms.get(room).text
+          id: roomId,
+          text: rooms.get(roomId).text
         }
       });
 
-      socket.to(room).emit("broadcasted-user-connected", { name: newUserName });
+      socket.to(roomId).emit("broadcasted-user-connected", { name: newUserName });
 
       console.log("[new user connected]", newUserName);
     });

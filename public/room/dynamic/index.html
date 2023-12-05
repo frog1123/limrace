@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+  <script src="/lib/socket.io.min.js"></script>
   <script defer src="dynamic/index.js"></script>
   <link rel="stylesheet" href="dynamic/styles.css">
   <link rel="icon" type="image/x-icon" href="/assets/logo.ico">
@@ -20,20 +20,26 @@
     </div>
   </a>
   <main id="container">
-    <div id="info-container">
-      <p id="room-info">...</p>
-      <p id="login-info">...</p>
+    <div id="room-not-found-content" style="display: none;">
+      <p id="room-not-found-text">room could not be found or doesn&rsquo;t exist</p>
     </div>
-    <div id="game-container">
-      <div id="race-container">
-        <div id="race"></div>
+    <div id="room-found-content" style="display: none;">
+      <div id="info-container">
+        <p id="room-info">...</p>
+        <p id="login-info">...</p>
       </div>
-      <div id="text-container">
-        <div id="text"></div>
-      </div>
-      <div id="input-container">
-        <input id="input" autocomplete="off" autocapitalize="off" autocorrect="off" autofocus onfocus="this.select()" />
-        <p id="finish-text" style="display: none;">🎉 you finished!</p>
+      <div id="game-container">
+        <div id="race-container">
+          <div id="race"></div>
+        </div>
+        <div id="text-container">
+          <div id="text"></div>
+        </div>
+        <div id="input-container">
+          <input id="input" autocomplete="off" autocapitalize="off" autocorrect="off" autofocus
+            onfocus="this.select()" />
+          <p id="finish-text" style="display: none;">🎉 you finished!</p>
+        </div>
       </div>
     </div>
   </main>

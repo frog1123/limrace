@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap");
+
+html,
+body {
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+}
+
+#logo-container {
+  text-decoration: none;
+}
+
+#logo {
+  display: grid;
+  place-items: center;
+  grid-template-columns: max-content max-content;
+  gap: 0.5em;
+  margin-left: 2em;
+  margin-top: 1em;
+  position: absolute;
+}
+
+#logo p {
+  font-family: Lexend Deca, sans-serif;
+  font-size: 2rem;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+  transition-duration: 250ms;
+}
+
+#logo:hover p {
+  color: #a1a1aa;
+}
+
+#logo img {
+  width: 100%;
+  height: 100%;
+}
+
+#container {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#create-form {
+  display: grid;
+  grid-auto-flow: row;
+  place-items: center;
+  gap: 0.5em;
+}
+
+#create-form span {
+  font-size: large;
+  font-family: "Fira Code", monospace;
+}
+
+#create-room-btn {
+  height: 45px;
+  width: 270px;
+  outline: none;
+  border-radius: 0.375em;
+  border: none;
+  background-color: #6366f1;
+  transition-duration: 250ms;
+  cursor: pointer;
+}
+
+#create-room-btn span {
+  color: #fff;
+  text-align: center;
+  font-family: "Fira Code", monospace;
+  font-size: large;
+}
+
+#create-room-btn:hover {
+  background-color: #4338ca;
+}
+
+.btn-disabled {
+  background-color: #6366f160 !important;
+  cursor: default !important;
+}
+
+::selection {
+  background: #3729ce90;
+  color: #fff;
+}
