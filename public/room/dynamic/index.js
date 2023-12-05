@@ -1,9 +1,9 @@
 const socket = io(window.length.origin);
+const roomId = window.location.pathname.split("/").pop();
 
 socket.on("connect", () => {
   console.log("connected to server");
 
-  const roomId = window.location.pathname.split("/").pop();
   socket.emit("join-room", roomId);
 });
 
@@ -44,7 +44,8 @@ socket.on("user-connected", data => {
   console.log("chars: ", chars);
   renderInitialText();
 
-  roomUsers = [data.name, ...data.users];
+  console.log(data);
+  roomUsers = data.users;
   renderUsers();
 
   document.getElementById("room-not-found-content").style.display = "none";

@@ -41,6 +41,9 @@ const setupSocketIO = (server, port) => {
       do {
         newUserName = `guest-${Math.floor(Math.random() * 900000) + 100000}`;
       } while (isUserNameTaken(newUserName));
+      users.set(newUserName, { name: newUserName, room: roomId });
+
+      console.log(users, getOtherUsersInRoom(roomId, socket.id));
 
       // emit a message to the user with their details
       socket.emit("user-connected", {
@@ -72,8 +75,6 @@ const setupSocketIO = (server, port) => {
 
     socket.on("word-completed", data => {
       const user = users.get(socket.id);
-
-      console.log(data, user);
 
       socket.to(user.room).emit("broadcasted-word-completed", { name: user.name, char: data.char });
     });
