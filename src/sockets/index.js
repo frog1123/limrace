@@ -28,8 +28,10 @@ const setupSocketIO = (server, port) => {
       socket.join(room);
 
       // generate a random username for the user
-      const newUserName = `guest-${Math.floor(Math.random() * 900000) + 100000}`;
-      users.set(socket.id, { name: newUserName, room });
+      let newUserName;
+      do {
+        newUserName = `guest-${Math.floor(Math.random() * 900000) + 100000}`;
+      } while (isUserNameTaken(newUserName));
 
       // emit a message to the user with their details
       socket.emit("user-connected", {
@@ -69,10 +71,14 @@ const setupSocketIO = (server, port) => {
   });
 };
 
-function getOtherUsersInRoom(room, currentUserId) {
+const getOtherUsersInRoom = (room, currentUserId) => {
   return Array.from(users.values())
     .filter(user => user.room === room && user.socketId !== currentUserId)
     .map(user => ({ name: user.name }));
-}
+};
+
+const isUserNameTaken = username => {
+  return Array.from(users.values()).some(user => user.name === username);
+};
 
 module.exports = setupSocketIO;
