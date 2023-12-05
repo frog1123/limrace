@@ -106,3 +106,24 @@ body {
   background: #3729ce90;
   color: #fff;
 }
+
+#create-room {
+  text-decoration: none;
+}
+
+#create-room div {
+  display: grid;
+  place-items: center;
+  grid-template-columns: max-content max-content;
+}
+
+#create-room div * {
+  color: #6366f1;
+  stroke: #6366f1;
+  transition-duration: 250ms;
+}
+
+#create-room:hover div * {
+  color: #4338ca;
+  stroke: #4338ca;
+}

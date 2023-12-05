@@ -77,8 +77,4 @@ router.get("/assets/police_car.svg", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "..", "assets", "police_car.svg"));
 });
 
-router.get("/assets/chevron-right.svg", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "..", "assets", "chevron-right.svg"));
-});
-
 module.exports = router;

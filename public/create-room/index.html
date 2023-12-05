@@ -4,30 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script defer src="join-room/index.js"></script>
-  <link rel="stylesheet" href="join-room/styles.css">
+  <script defer src="create-room/index.js"></script>
+  <link rel="stylesheet" href="create-room/styles.css">
   <link rel="icon" type="image/x-icon" href="/assets/logo.ico">
-  <title>limrace</title>
+  <title>create room</title>
 </head>
 
 <body>
   <a href="/" id="logo-container">
     <div id="logo">
       <img src="/assets/logo.svg" />
-      <p>create room</p>
+      <p>limrace</p>
     </div>
   </a>
   <div id="container">
-    <div id="code-form">
-      <span>room code</span>
-      <input id="code-input" autocomplete="off" autocapitalize="off" autocorrect="off">
-      <button id="join-room-btn" class="btn-disabled"><span>join</span></button>
-      <a href="/create-room" id="create-room">
-        <div>
-          <img src="/assets/chevron-right.svg" />
-          <span>or create your own</span>
-        </div>
-      </a>
+    <div id="create-form">
+      <span>create room</span>
+      <button id="join-room-btn" class="btn-disabled"><span>create room</span></button>
     </div>
   </div>
 </body>
