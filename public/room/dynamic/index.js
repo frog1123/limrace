@@ -39,11 +39,12 @@ socket.on("user-connected", data => {
   words[words.length - 1] = words[words.length - 1].trim();
 
   totalChars = chars.length;
+
   console.log("words: ", words);
   console.log("chars: ", chars);
   renderInitialText();
 
-  roomUsers = data.users;
+  roomUsers = [data.name, ...data.users];
   renderUsers();
 
   document.getElementById("room-not-found-content").style.display = "none";
