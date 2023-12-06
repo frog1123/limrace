@@ -14,6 +14,20 @@ const setupSocketIO = (server, port) => {
   io.on("connection", socket => {
     console.log(`socket server running on port ${port}`);
 
+    socket.on("new-user", () => {
+      // generate a random username for the user
+      let newUserName;
+      do {
+        newUserName = `guest-${Math.floor(Math.random() * 900000) + 100000}`;
+      } while (isUserNameTaken(newUserName));
+      users.set(newUserName, { socketId: socket.id, room: null });
+
+      socket.emit("new-user-response", {
+        name: newUserName,
+        room: null
+      });
+    });
+
     socket.on("create-room", () => {
       let roomId;
       do {
@@ -26,8 +40,7 @@ const setupSocketIO = (server, port) => {
       socket.emit("room-created", roomId);
     });
 
-    socket.on("join-room", roomId => {
-      // create room (needs to be int)
+    socket.on("join-room", (name, roomId) => {
       if (!rooms.has(roomId)) {
         socket.emit("room-not-found");
         return;
@@ -36,32 +49,23 @@ const setupSocketIO = (server, port) => {
       // join the specified room
       socket.join(roomId);
 
-      // generate a random username for the user
-      let newUserName;
-      do {
-        newUserName = `guest-${Math.floor(Math.random() * 900000) + 100000}`;
-      } while (isUserNameTaken(newUserName));
-      users.set(socket.id, { name: newUserName, room: roomId });
-
-      console.log(users, getOtherUsersInRoom(roomId, socket.id));
-
-      // emit a message to the user with their details
+      users.set(name, { socketId: socket.id, room: roomId });
+      // emit a message to the user  with their details
       socket.emit("user-connected", {
-        name: newUserName,
-        users: getOtherUsersInRoom(roomId, socket.id),
+        users: getUsersInRoom(roomId),
         room: {
           id: roomId,
           text: rooms.get(roomId).text
         }
       });
 
-      socket.to(roomId).emit("broadcasted-user-connected", { name: newUserName });
+      socket.to(roomId).emit("broadcasted-user-connected");
 
-      console.log("[new user connected]", newUserName);
+      console.log("[new user connected]", name);
     });
 
     socket.on("disconnect", () => {
-      const user = users.get(socket.id);
+      const user = getUserBySocketId(socket.id);
 
       if (user) {
         console.log("[user disconnected]", user.name);
@@ -69,26 +73,34 @@ const setupSocketIO = (server, port) => {
         // broadcast to all users in the room that a user has disconnected
         socket.to(user.room).emit("broadcasted-user-disconnected", { name: user.name });
 
-        users.delete(socket.id);
+        users.delete(user.name);
       }
     });
 
     socket.on("word-completed", data => {
-      const user = users.get(socket.id);
+      const user = getUserBySocketId(socket.id);
 
       socket.to(user.room).emit("broadcasted-word-completed", { name: user.name, char: data.char });
     });
   });
 };
 
-const getOtherUsersInRoom = (room, currentUserId) => {
-  return Array.from(users.values())
-    .filter(user => user.room === room && user.socketId !== currentUserId)
-    .map(user => ({ name: user.name }));
+const getUsersInRoom = roomId => {
+  const usersInRoom = [];
+
+  users.forEach((user, name) => {
+    if (user.room === roomId) usersInRoom.push({ name });
+  });
+
+  return usersInRoom;
 };
 
 const isUserNameTaken = username => {
   return Array.from(users.values()).some(user => user.name === username);
+};
+
+const getUserBySocketId = socketId => {
+  return Array.from(users.values()).find(user => user.socketId === socketId);
 };
 
 module.exports = setupSocketIO;

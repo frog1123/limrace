@@ -1,10 +1,9 @@
-const socket = io(window.length.origin);
 const roomId = window.location.pathname.split("/").pop();
 
 socket.on("connect", () => {
   console.log("connected to server");
-
-  socket.emit("join-room", roomId);
+  if (!current) return;
+  socket.emit("join-room", current.name, roomId);
 });
 
 socket.on("room-not-found", () => {
@@ -13,7 +12,6 @@ socket.on("room-not-found", () => {
 });
 
 let roomUsers = [];
-let currentUser = "";
 let words;
 let currentWordIndex = 0;
 let chars;
@@ -23,9 +21,8 @@ let completedWordCharIndex = 0;
 let virtualText = "";
 
 socket.on("user-connected", data => {
-  currentUser = data.name;
   document.getElementById("room-info").textContent = `room ${data.room.id}`;
-  document.getElementById("login-info").textContent = `logged in as ${currentUser}`;
+  document.getElementById("login-info").textContent = `logged in as ${current.name}`;
 
   words = data.room.text.split(" ").map((word, index, array) => {
     return index === array.length - 1 ? word : word + " ";
@@ -87,7 +84,7 @@ const renderUsers = () => {
     <div id="row-${roomUsers[i].name}" class="row">
       <div class="track">
         <div id="car-${roomUsers[i].name}" class="car">
-          <span>${roomUsers[i].name === currentUser ? "&nbsp;you (guest)" : roomUsers[i].name}</span>
+          <span>${roomUsers[i].name === current.name ? "&nbsp;you (guest)" : roomUsers[i].name}</span>
           <img src="/assets/red_car.svg" />
         </div>
       </div>
@@ -209,7 +206,7 @@ input.addEventListener("input", () => {
     completedWordCharIndex = currentCharIndex;
 
     updatePlaceholder(currentWordIndex);
-    moveCar(currentUser, currentCharIndex);
+    moveCar(current.name, currentCharIndex);
     socket.emit("word-completed", { char: currentCharIndex });
 
     if (currentWordIndex === words.length) {

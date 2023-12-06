@@ -1,4 +1,3 @@
-const socket = io(window.length.origin);
 const createRoom = document.getElementById("create-room-btn");
 
 socket.on("connect", () => {

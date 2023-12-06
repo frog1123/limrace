@@ -78,9 +78,12 @@ router.get("/assets/police_car.svg", (req, res) => {
 });
 
 // lib
-
 router.get("/lib/socket.io.min.js", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "..", "public", "lib", "socket.io.min.js"));
+});
+
+router.get("/lib/session.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "public", "lib", "session.js"));
 });
 
 module.exports = router;
