@@ -1,9 +1,25 @@
+const socket = io(window.length.origin);
 const roomId = window.location.pathname.split("/").pop();
+
+let sessionLogicExecuted = false;
+let current = JSON.parse(sessionStorage.getItem("current"));
+
+if (!sessionLogicExecuted) {
+  console.log(current);
+
+  if (current) socket.emit("join-room", current.name, roomId);
+  else socket.emit("new-user");
+
+  sessionLogicExecuted = true;
+}
 
 socket.on("connect", () => {
   console.log("connected to server");
-  if (!current) return;
-  socket.emit("join-room", current.name, roomId);
+});
+
+socket.on("new-user-response", data => {
+  sessionStorage.setItem("current", JSON.stringify({ name: data.name }));
+  current = JSON.parse(sessionStorage.getItem("current"));
 });
 
 socket.on("room-not-found", () => {
@@ -22,7 +38,7 @@ let virtualText = "";
 
 socket.on("user-connected", data => {
   document.getElementById("room-info").textContent = `room ${data.room.id}`;
-  document.getElementById("login-info").textContent = `logged in as ${current.name}`;
+  document.getElementById("login-info").textContent = `logged in as ${current && current.name}`;
 
   words = data.room.text.split(" ").map((word, index, array) => {
     return index === array.length - 1 ? word : word + " ";
@@ -41,7 +57,6 @@ socket.on("user-connected", data => {
   console.log("chars: ", chars);
   renderInitialText();
 
-  console.log(data);
   roomUsers = data.users;
   renderUsers();
 

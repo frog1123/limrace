@@ -100,16 +100,15 @@ const isUserNameTaken = username => {
   return Array.from(users.values()).some(user => user.name === username);
 };
 
-const getUserBySocketId = (socketId) => {
+const getUserBySocketId = socketId => {
   let foundUser = null;
 
   users.forEach((user, name) => {
-    if (user.socketId === socketId) {
+    if (user.socketId === socketId)
       foundUser = {
         name,
         room: user.room
       };
-    }
   });
 
   return foundUser;
