@@ -66,6 +66,7 @@ const setupSocketIO = (server, port) => {
 
     socket.on("disconnect", () => {
       const user = getUserBySocketId(socket.id);
+      console.log(user);
 
       if (user) {
         console.log("[user disconnected]", user.name);
@@ -99,10 +100,19 @@ const isUserNameTaken = username => {
   return Array.from(users.values()).some(user => user.name === username);
 };
 
-const getUserBySocketId = socketId => {
+const getUserBySocketId = (socketId) => {
+  let foundUser = null;
+
   users.forEach((user, name) => {
-    if (user.socketId === socketId) return { name, room: user.room };
+    if (user.socketId === socketId) {
+      foundUser = {
+        name,
+        room: user.room
+      };
+    }
   });
+
+  return foundUser;
 };
 
 module.exports = setupSocketIO;
