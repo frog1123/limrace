@@ -115,6 +115,7 @@ body {
   display: grid;
   place-items: center;
   grid-template-columns: max-content max-content;
+  gap: 0.5em;
 }
 
 #create-room div * {
@@ -126,4 +127,12 @@ body {
 #create-room:hover div * {
   color: #4338ca;
   stroke: #4338ca;
+}
+
+#create-room div svg {
+  transition-duration: 300ms;
+}
+
+#create-room:hover div svg {
+  transform: translateX(10px);
 }
