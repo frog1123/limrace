@@ -116,10 +116,14 @@ const renderInitialText = () => {
     const wordEl = document.createElement("span");
     wordEl.id = `word-${index}`;
 
+    if (index === 0) wordEl.classList.add("word-current");
+
     word.split("").forEach(char => {
       const charEl = document.createElement("span");
-      if (char === " ") charEl.textContent = "•";
-      else charEl.textContent = char;
+      if (char === " ") {
+        charEl.textContent = "•";
+        charEl.classList.add("no-underline");
+      } else charEl.textContent = char;
       charEl.id = `char-${renderedChar}`;
       wordEl.appendChild(charEl);
       renderedChar++;
