@@ -1,17 +1,11 @@
 const socket = io(window.length.origin);
 const roomId = window.location.pathname.split("/").pop();
 
-let sessionLogicExecuted = false;
+let joinStatus = "start";
 let current = JSON.parse(sessionStorage.getItem("current"));
 
-if (!sessionLogicExecuted) {
-  console.log(current);
-
-  if (current) socket.emit("join-room", current.name, roomId);
-  else socket.emit("new-user");
-
-  sessionLogicExecuted = true;
-}
+if (!current) socket.emit("new-user");
+else socket.emit("join-room", current.name, roomId);
 
 socket.on("connect", () => {
   console.log("connected to server");
@@ -20,6 +14,7 @@ socket.on("connect", () => {
 socket.on("new-user-response", data => {
   sessionStorage.setItem("current", JSON.stringify({ name: data.name }));
   current = JSON.parse(sessionStorage.getItem("current"));
+  socket.emit("join-room", current.name, roomId);
 });
 
 socket.on("room-not-found", () => {
