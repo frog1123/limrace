@@ -59,7 +59,7 @@ const setupSocketIO = (server, port) => {
         }
       });
 
-      socket.to(roomId).emit("broadcasted-user-connected");
+      socket.to(roomId).emit("broadcasted-user-connected", { name });
 
       console.log("[new user connected]", name);
     });
@@ -100,7 +100,9 @@ const isUserNameTaken = username => {
 };
 
 const getUserBySocketId = socketId => {
-  return Array.from(users.values()).find(user => user.socketId === socketId);
+  users.forEach((user, name) => {
+    if (user.socketId === socketId) return { name, room: user.room };
+  });
 };
 
 module.exports = setupSocketIO;

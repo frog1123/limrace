@@ -55,6 +55,8 @@ socket.on("broadcasted-user-connected", data => {
 });
 
 socket.on("broadcasted-user-disconnected", data => {
+  console.log(data);
+
   roomUsers = roomUsers.filter(user => user.name !== data.name);
   renderUsers();
 });
