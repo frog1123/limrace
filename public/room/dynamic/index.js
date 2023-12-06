@@ -108,14 +108,24 @@ const renderUsers = () => {
   }
 };
 
+let renderedChar = 0;
 const renderInitialText = () => {
   const container = document.getElementById("text");
 
-  chars.forEach(char => {
-    const span = document.createElement("span");
-    if (char === " ") span.textContent = "•";
-    else span.textContent = char;
-    container.appendChild(span);
+  words.forEach((word, index) => {
+    const wordEl = document.createElement("span");
+    wordEl.id = `word-${index}`;
+
+    word.split("").forEach(char => {
+      const charEl = document.createElement("span");
+      if (char === " ") charEl.textContent = "•";
+      else charEl.textContent = char;
+      charEl.id = `char-${renderedChar}`;
+      wordEl.appendChild(charEl);
+      renderedChar++;
+    });
+
+    container.appendChild(wordEl);
   });
 
   const caret = document.createElement("div");
@@ -135,13 +145,14 @@ const updatePlaceholder = index => {
   input.setAttribute("data-current-word", index);
 };
 
-const charsContainer = document.getElementById("text").children;
+// const charsContainer = document.getElementById("text").children;
 const highlightCurrentChar = index => {
-  for (let i = 0; i < charsContainer.length; i++) {
+  for (let i = 0; i < chars.length; i++) {
+    const char = document.getElementById(`char-${i}`);
     if (i === index) {
-      charsContainer[i].classList.add("current-char");
+      char.classList.add("current-char");
     } else {
-      charsContainer[i].classList.remove("current-char");
+      char.classList.remove("current-char");
     }
   }
   updateCaretPosition();
@@ -150,12 +161,12 @@ const highlightCurrentChar = index => {
 const input = document.getElementById("input");
 const highlightCompletedChars = () => {
   let earliestIncorrectChar = Infinity;
-  for (let i = 0; i < charsContainer.length; i++) {
-    const char = charsContainer[i];
+  for (let i = 0; i < chars.length; i++) {
+    const char = document.getElementById(`char-${i}`);
 
     if (i >= earliestIncorrectChar) {
       for (let j = earliestIncorrectChar; j < currentCharIndex; j++) {
-        const ichar = charsContainer[j];
+        const ichar = document.getElementById(`char-${j}`);
 
         ichar.classList.remove("completed-char");
         ichar.classList.add("incorrect-char");
