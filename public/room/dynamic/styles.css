@@ -242,3 +242,7 @@ body {
   font-family: "Fira Code", monospace;
   text-align: center;
 }
+
+.word-current {
+  text-decoration: underline;
+}

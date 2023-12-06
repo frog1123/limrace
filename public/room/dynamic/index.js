@@ -164,14 +164,11 @@ const highlightCompletedChars = () => {
   for (let i = 0; i < chars.length; i++) {
     const char = document.getElementById(`char-${i}`);
 
-    if (i >= earliestIncorrectChar) {
-      for (let j = earliestIncorrectChar; j < currentCharIndex; j++) {
-        const ichar = document.getElementById(`char-${j}`);
+    for (let j = earliestIncorrectChar; j < currentCharIndex; j++) {
+      const ichar = document.getElementById(`char-${j}`);
 
-        ichar.classList.remove("completed-char");
-        ichar.classList.add("incorrect-char");
-      }
-      break;
+      ichar.classList.remove("completed-char");
+      ichar.classList.add("incorrect-char");
     }
 
     if (char.textContent === virtualText[i] || (char.textContent === "•" && virtualText[i] === " ")) {
@@ -224,9 +221,18 @@ input.addEventListener("input", () => {
 
   if (input.value === words[currentWordIndex]) {
     input.value = "";
+
+    const prevCompletedWord = document.getElementById(`word-${currentWordIndex}`);
+    prevCompletedWord.classList.remove("word-current");
+
     currentWordIndex += 1;
     // currentCharIndex += words[currentWordIndex - 1].length;
     completedWordCharIndex = currentCharIndex;
+
+    if (currentWordIndex < words.length) {
+      const nextWord = document.getElementById(`word-${currentWordIndex}`);
+      nextWord.classList.add("word-current");
+    }
 
     updatePlaceholder(currentWordIndex);
     moveCar(current.name, currentCharIndex);
@@ -234,7 +240,7 @@ input.addEventListener("input", () => {
 
     if (currentWordIndex === words.length) {
       // -2 don't include caret
-      const lastChar = charsContainer[charsContainer.length - 2];
+      const lastChar = document.getElementById(`char-${chars.length - 1}`);
       lastChar.classList.add("completed-char");
 
       input.style.display = "none";
